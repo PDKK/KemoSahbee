@@ -77,7 +77,13 @@ exports.delete = function(req, res) {
  * List of Items
  */
 exports.list = function(req, res) {
-	Item.find().sort('-created').populate('user', 'displayName').exec(function(err, items) {
+    console.log(req.param("nextAction"));
+    var criteria = {};
+    if (req.param("nextAction") == 'true') {
+        criteria["nextAction"] = true;
+    }
+    console.log(criteria);
+	Item.find(criteria).sort('-created').populate('user', 'displayName').exec(function(err, items) {
 		if (err) {
 			return res.status(400).send({
 				message: errorHandler.getErrorMessage(err)
@@ -87,6 +93,9 @@ exports.list = function(req, res) {
 		}
 	});
 };
+
+
+
 
 /**
  * Item middleware
