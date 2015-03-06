@@ -39,7 +39,7 @@ var ItemSchema = new Schema({
     },
     parent: {
         type : Schema.ObjectId,
-        ref: 'Items'
+        ref: 'items'
     },
     waitingFor: {
         type : String,
