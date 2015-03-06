@@ -8,7 +8,11 @@ angular.module('items').factory('Items', ['$resource',
 		}, {
 			update: {
 				method: 'PUT'
-			}
+			},
+            inbox: {
+                url: 'api/inbox',
+                isArray: true
+            }
 		});
 	}
 ]);

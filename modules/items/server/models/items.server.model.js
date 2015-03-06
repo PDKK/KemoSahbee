@@ -34,9 +34,12 @@ var ItemSchema = new Schema({
         default: false
     },
     project: {
-        type : String,
-        default: '',
-        trim: true
+        type: Boolean,
+        default: false
+    },
+    parent: {
+        type : Schema.ObjectId,
+        ref: 'Items'
     },
     waitingFor: {
         type : String,

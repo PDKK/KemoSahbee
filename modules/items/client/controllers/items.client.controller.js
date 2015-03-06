@@ -54,5 +54,9 @@ angular.module('items').controller('ItemsController', ['$scope', '$stateParams',
 				itemId: $stateParams.itemId
 			});
 		};
+
+        $scope.getInbox = function() {
+          $scope.inbox = Items.getInbox();
+        };
 	}
 ]);

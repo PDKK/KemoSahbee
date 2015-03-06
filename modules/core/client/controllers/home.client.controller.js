@@ -6,6 +6,7 @@ angular.module('core').controller('HomeController', ['$scope', 'Authentication',
 		$scope.authentication = Authentication;
         $scope.homeInit = function () {
             $scope.nextActions = Items.query({nextAction:true});
+            $scope.inbox = Items.inbox();
         };
 	}
 ]);

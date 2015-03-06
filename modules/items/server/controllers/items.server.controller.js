@@ -77,10 +77,11 @@ exports.delete = function(req, res) {
  * List of Items
  */
 exports.list = function(req, res) {
-    console.log(req.param("nextAction"));
+    console.log(req.param('nextAction'));
+    console.log(req.param());
     var criteria = {};
-    if (req.param("nextAction") == 'true') {
-        criteria["nextAction"] = true;
+    if (req.param('nextAction') === 'true') {
+        criteria.nextAction = true;
     }
     console.log(criteria);
 	Item.find(criteria).sort('-created').populate('user', 'displayName').exec(function(err, items) {
@@ -92,6 +93,29 @@ exports.list = function(req, res) {
 			res.json(items);
 		}
 	});
+};
+
+/**
+ * List of Items
+ */
+exports.inbox = function(req, res) {
+
+    var criteria = {
+        nextAction:false,
+        project:false
+
+    };
+
+    console.log(criteria);
+    Item.find(criteria).sort('-created').populate('user', 'displayName').exec(function(err, items) {
+        if (err) {
+            return res.status(400).send({
+                message: errorHandler.getErrorMessage(err)
+            });
+        } else {
+            res.json(items);
+        }
+    });
 };
 
 

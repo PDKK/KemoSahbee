@@ -1,15 +1,28 @@
 <section data-ng-controller="HomeController" data-ng-init="homeInit()">
 
 	<div class="row">
-		<div class="col-md-4">
+        <div class="col-md-3">
+            <h2>
+                <strong>I</strong>nbox
+            </h2>
+            Input for new task goes here
+            <ul >
+                <li data-ng-repeat="item in inbox" >
+                    <a href = "items/{{item._id}}/edit">{{item.title}}</a>
+                </li>
+            </ul>
+        </div>
+		<div class="col-md-3">
 			<h2>
-				<strong>N</strong>ext Actions
+				<strong>N</strong>ext <strong>A</strong>ctions
 			</h2>
             <ul >
-                <li data-ng-repeat="item in nextActions" data-ng-bind="item.title"></li>
+                <li data-ng-repeat="item in nextActions" >
+                    <a href = "items/{{item._id}}/edit">{{item.title}}</a>
+                </li>
             </ul>
 		</div>
-		<div class="col-md-4">
+		<div class="col-md-3">
 			<h2>
 				<strong>P</strong>rojects
 			</h2>
@@ -18,7 +31,7 @@
                 <li>Take over the world</li>
             </ul>
 		</div>
-		<div class="col-md-4">
+		<div class="col-md-3">
 			<h2>
 				<strong>W</strong>aiting For
 			</h2>

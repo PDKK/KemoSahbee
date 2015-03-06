@@ -18,15 +18,21 @@ exports.invokeRolesPolicies = function() {
 			resources: '/api/items',
 			permissions: '*'
 		}, {
+            resources: '/api/inbox',
+            permissions: ['get', 'post']
+        }, {
 			resources: '/api/items/:itemId',
 			permissions: '*'
 		}]
 	}, {
 		roles: ['user'],
 		allows: [{
-			resources: '/api/items',
-			permissions: ['get', 'post']
-		}, {
+            resources: '/api/items',
+            permissions: ['get', 'post']
+        }, {
+            resources: '/api/inbox',
+            permissions: ['get', 'post']
+        }, {
 			resources: '/api/items/:itemId',
 			permissions: ['get']
 		}]
