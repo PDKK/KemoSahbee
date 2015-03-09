@@ -108,7 +108,6 @@ exports.inbox = function(req, res) {
 
     };
 
-    console.log(criteria);
     Item.find(criteria).sort('-created').populate('user', 'displayName').exec(function(err, items) {
         if (err) {
             return res.status(400).send({
@@ -129,7 +128,6 @@ exports.projects = function(req, res) {
         project:true
     };
 
-    console.log(criteria);
     Item.find(criteria).sort('-created').populate('user', 'displayName').exec(function(err, items) {
         if (err) {
             return res.status(400).send({
@@ -147,7 +145,6 @@ exports.waitingFor = function(req, res) {
         waitingFor:{'$nin': [null, '']}
     };
 
-    console.log(criteria);
     Item.find(criteria).sort('waitingFor').populate('user', 'displayName').exec(function(err, items) {
         if (err) {
             return res.status(400).send({
