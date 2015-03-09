@@ -26,9 +26,10 @@
 			<h2>
 				<strong>P</strong>rojects
 			</h2>
-            <ul>
-                <li>Developm a website</li>
-                <li>Take over the world</li>
+            <ul >
+                <li data-ng-repeat="item in projects" >
+                    <a href = "items/{{item._id}}/edit">{{item.title}}</a>
+                </li>
             </ul>
 		</div>
 		<div class="col-md-3">

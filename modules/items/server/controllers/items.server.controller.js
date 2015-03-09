@@ -118,6 +118,27 @@ exports.inbox = function(req, res) {
     });
 };
 
+/**
+ * List of Items
+ */
+exports.projects = function(req, res) {
+
+    var criteria = {
+        project:true
+    };
+
+    console.log(criteria);
+    Item.find(criteria).sort('-created').populate('user', 'displayName').exec(function(err, items) {
+        if (err) {
+            return res.status(400).send({
+                message: errorHandler.getErrorMessage(err)
+            });
+        } else {
+            res.json(items);
+        }
+    });
+};
+
 
 
 

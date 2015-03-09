@@ -20,6 +20,9 @@ exports.invokeRolesPolicies = function() {
 		}, {
             resources: '/api/inbox',
             permissions: ['get', 'post']
+        },{
+            resources: '/api/projects',
+            permissions: ['get', 'post']
         }, {
 			resources: '/api/items/:itemId',
 			permissions: '*'
@@ -31,6 +34,9 @@ exports.invokeRolesPolicies = function() {
             permissions: ['get', 'post']
         }, {
             resources: '/api/inbox',
+            permissions: ['get', 'post']
+        }, {
+            resources: '/api/projects',
             permissions: ['get', 'post']
         }, {
 			resources: '/api/items/:itemId',

@@ -15,6 +15,9 @@ module.exports = function(app) {
     app.route('/api/inbox').all(itemsPolicy.isAllowed)
         .get(items.inbox);
 
+    app.route('/api/projects').all(itemsPolicy.isAllowed)
+        .get(items.projects);
+
 
     // Single item routes
 	app.route('/api/items/:itemId').all(itemsPolicy.isAllowed)

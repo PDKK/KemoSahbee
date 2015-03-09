@@ -12,6 +12,10 @@ angular.module('items').factory('Items', ['$resource',
             inbox: {
                 url: 'api/inbox',
                 isArray: true
+            },
+            projects: {
+                url: 'api/projects',
+                isArray: true
             }
 		});
 	}
