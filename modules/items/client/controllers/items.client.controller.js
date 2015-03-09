@@ -3,6 +3,7 @@
 angular.module('items').controller('ItemsController', ['$scope', '$stateParams', '$location', 'Authentication', 'Items',
 	function($scope, $stateParams, $location, Authentication, Items) {
 		$scope.authentication = Authentication;
+        $scope.projects = Items.projects();
 
 		$scope.create = function() {
 			var item = new Items({

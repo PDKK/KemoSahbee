@@ -27,6 +27,9 @@
                         <input name="waitingFor" type="text" data-ng-model="item.waitingFor" id="waitingFor" class="form-control" placeholder="Waiting For">
                     </div>
                 </div>
+                <select class="form-control" data-ng-model="item.project">
+                    <option data-ng-repeat="project in projects" value="{{project._id}}">{{project.title}}</option>
+                </select>
 				<div class="form-group">
 					<label class="control-label" for="content">Content</label>
 					<div class="controls">
