@@ -16,6 +16,10 @@ angular.module('items').factory('Items', ['$resource',
             projects: {
                 url: 'api/projects',
                 isArray: true
+            },
+            waitingFor: {
+                url: 'api/waitingFor',
+                isArray: true
             }
 		});
 	}

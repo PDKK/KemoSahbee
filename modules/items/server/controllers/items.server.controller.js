@@ -44,6 +44,7 @@ exports.update = function(req, res) {
 	item.content = req.body.content;
     item.nextAction = req.body.nextAction;
     item.project = req.body.project;
+    item.waitingFor = req.body.waitingFor;
 
 	item.save(function(err) {
 		if (err) {
@@ -102,7 +103,8 @@ exports.inbox = function(req, res) {
 
     var criteria = {
         nextAction:false,
-        project:false
+        project:false,
+        waitingFor:{'$in': [null, '']}
 
     };
 
@@ -139,6 +141,37 @@ exports.projects = function(req, res) {
     });
 };
 
+exports.waitingFor = function(req, res) {
+
+    var criteria = {
+        waitingFor:{'$nin': [null, '']}
+    };
+
+    console.log(criteria);
+    Item.find(criteria).sort('waitingFor').populate('user', 'displayName').exec(function(err, items) {
+        if (err) {
+            return res.status(400).send({
+                message: errorHandler.getErrorMessage(err)
+            });
+        } else {
+            /* Build this into an object, sorted by waiting for */
+            var byName = [];
+            var currentName = 'UNDEFINED';
+            var currentObject;
+            var waitingForLength = items.length;
+            for (var i=0; i< waitingForLength; i++) {
+                if (items[i].waitingFor !== currentName) {
+                    currentName = items[i].waitingFor;
+                    currentObject = { name: currentName, items:[] };
+                    byName.push(currentObject);
+                }
+                currentObject.items.push(items[i]);
+            }
+
+            res.json(byName);
+        }
+    });
+};
 
 
 

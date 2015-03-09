@@ -36,18 +36,18 @@
 			<h2>
 				<strong>W</strong>aiting For
 			</h2>
-            <h3>
-                <dt>Napolean</dt>
-            </h3>
-            <ul>
-                <li>Get comments on strategy</li>
-            </ul>
-            <h3>
-                <dt>Wellington</dt>
-            </h3>
-            <ul>
-                <li>Get comments on boots</li>
-            </ul>
+            <div data-ng-repeat="wf in waitingFor">
+                <strong>
+                    <dt>{{wf.name}}: </dt>
+                </strong>
+                <ul>
+                    <li data-ng-repeat="item in wf.items">
+                        <a href = "items/{{item._id}}/edit">{{item.title}}</a>
+                    </li>
+                </ul>
+            </div>
+
+
 		</div>
 	</div>
 	<div class="well">

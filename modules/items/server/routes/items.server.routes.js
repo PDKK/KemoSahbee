@@ -18,6 +18,9 @@ module.exports = function(app) {
     app.route('/api/projects').all(itemsPolicy.isAllowed)
         .get(items.projects);
 
+    app.route('/api/waitingFor').all(itemsPolicy.isAllowed)
+        .get(items.waitingFor);
+
 
     // Single item routes
 	app.route('/api/items/:itemId').all(itemsPolicy.isAllowed)

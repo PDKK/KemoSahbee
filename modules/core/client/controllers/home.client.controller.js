@@ -8,6 +8,7 @@ angular.module('core').controller('HomeController', ['$scope', 'Authentication',
             $scope.nextActions = Items.query({nextAction:true});
             $scope.inbox = Items.inbox();
             $scope.projects = Items.projects();
+            $scope.waitingFor = Items.waitingFor();
         };
 	}
 ]);
