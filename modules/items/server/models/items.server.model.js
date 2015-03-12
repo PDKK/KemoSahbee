@@ -45,6 +45,14 @@ var ItemSchema = new Schema({
         type : String,
         default: '',
         trim: true
+    },
+    children: {
+        type: Number,
+        default: 0
+    },
+    childNextActions: {
+        type: Number,
+        default: 0
     }
 });
 

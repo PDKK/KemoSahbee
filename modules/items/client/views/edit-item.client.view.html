@@ -13,6 +13,12 @@
                                placeholder="Title" required>
                     </div>
                 </div>
+                <div data-ng-show="children.length" class="form-group">
+                    <ul>
+                        <li data-ng-repeat="child in children"><a href = "items/{{child._id}}/edit">{{child.title}}</a></li>
+                    </ul>
+                </div>
+
                 <div class="checkbox">
                     <label>
                         <input type="checkbox" data-ng-model="item.project"> Project

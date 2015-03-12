@@ -29,7 +29,10 @@ exports.invokeRolesPolicies = function() {
         },  {
 			resources: '/api/items/:itemId',
 			permissions: '*'
-		}]
+		}, {
+            resources: '/api/children/:itemId',
+            permissions: ['get']
+        }]
 	}, {
 		roles: ['user'],
 		allows: [{
@@ -47,7 +50,10 @@ exports.invokeRolesPolicies = function() {
         }, {
 			resources: '/api/items/:itemId',
 			permissions: ['get']
-		}]
+		}, {
+            resources: '/api/children/:itemId',
+            permissions: ['get']
+        }]
 	}, {
 		roles: ['guest'],
 		allows: [{

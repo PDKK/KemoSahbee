@@ -28,6 +28,9 @@ module.exports = function(app) {
 		.put(items.update)
 		.delete(items.delete);
 
+    app.route('/api/children/:itemId').all(itemsPolicy.isAllowed)
+        .get(items.children);
+
 	// Finish by binding the item middleware
 	app.param('itemId', items.itemByID);
 };

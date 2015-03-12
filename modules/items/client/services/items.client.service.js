@@ -20,6 +20,11 @@ angular.module('items').factory('Items', ['$resource',
             waitingFor: {
                 url: 'api/waitingFor',
                 isArray: true
+            },
+            children: {
+                url:'api/children/:itemId',
+                isArray: true,
+                itemId: '@_id'
             }
 		});
 	}

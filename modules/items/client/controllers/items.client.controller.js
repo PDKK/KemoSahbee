@@ -4,6 +4,9 @@ angular.module('items').controller('ItemsController', ['$scope', '$stateParams',
 	function($scope, $stateParams, $location, Authentication, Items) {
 		$scope.authentication = Authentication;
         $scope.projects = Items.projects();
+        $scope.children = Items.children({
+            itemId: $stateParams.itemId
+        });
 
 		$scope.create = function() {
 			var item = new Items({

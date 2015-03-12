@@ -9,6 +9,30 @@ var _ = require('lodash'),
 	Item = mongoose.model('Item'),
 	errorHandler = require(path.resolve('./modules/core/server/controllers/errors.server.controller'));
 
+
+/**
+ * Update the count for a parent
+ */
+
+var updateParents = function (id) {
+    Item.count({parent:id}).exec(function(err,c) {
+        console.log('Id:' + id + ', Count:' + c);
+        Item.update({_id:id},{children:c}).exec(function(err, numberAffected, raw){
+            // Empty update
+        });
+
+    });
+
+    Item.count({parent:id, nextAction:true}).exec(function(err,c) {
+        console.log('Id:' + id + ', nextAction:' + c);
+        Item.update({_id:id},{childNextActions:c}).exec(function(err, numberAffected, raw){
+            // Empty update
+        });
+
+    });
+
+};
+
 /**
  * Create a item
  */
@@ -31,7 +55,13 @@ exports.create = function(req, res) {
  * Show the current item
  */
 exports.read = function(req, res) {
-	res.json(req.item);
+    res.json(req.item);
+};
+
+exports.children = function(req, res) {
+    Item.find({parent:req.item._id}, function (err, children) {
+        res.json(children);
+    });
 };
 
 /**
@@ -39,6 +69,26 @@ exports.read = function(req, res) {
  */
 exports.update = function(req, res) {
 	var item = req.item;
+
+    var parentsToUpdate = [];
+
+
+
+    if (req.body.parent !== String(item.parent)) {
+        // Parent changed, so need to recalculate counts
+        console.log('Parent changed from' + item.parent + ' to ' + req.body.parent );
+        if (item.parent !== null) {
+            // Recalculate count for old parent
+            parentsToUpdate.push(item.parent);
+        }
+        if (req.body.parent !== null) {
+            // Recalculate count for new parent
+            parentsToUpdate.push(req.body.parent);
+        }
+    } else if (req.body.nextAction !== item.nextAction && item.parent !== null) {
+        // Child nextAction changed, so need to update parent
+        parentsToUpdate.push(item.parent);
+    }
 
 	item.title = req.body.title;
 	item.content = req.body.content;
@@ -53,6 +103,11 @@ exports.update = function(req, res) {
 				message: errorHandler.getErrorMessage(err)
 			});
 		} else {
+
+            parentsToUpdate.forEach (function(entry) {
+                    updateParents(entry);
+            });
+
 			res.json(item);
 		}
 	});
@@ -79,8 +134,7 @@ exports.delete = function(req, res) {
  * List of Items
  */
 exports.list = function(req, res) {
-    console.log(req.param('nextAction'));
-    console.log(req.param());
+
     var criteria = {};
     if (req.param('nextAction') === 'true') {
         criteria.nextAction = true;
@@ -98,13 +152,14 @@ exports.list = function(req, res) {
 };
 
 /**
- * List of Items
+ * List of that are not nextActions, and not a project, and not waiting for
  */
 exports.inbox = function(req, res) {
 
     var criteria = {
         nextAction:false,
         project:false,
+        parent:null,
         waitingFor:{'$in': [null, '']}
 
     };

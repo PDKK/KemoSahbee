@@ -10,6 +10,7 @@
                 <li data-ng-repeat="item in inbox" >
                     <a href = "items/{{item._id}}/edit">{{item.title}}</a>
                 </li>
+
             </ul>
             <form name="addForm" class="form-horizontal" data-ng-submit="newItem()" novalidate>
                 <div class="form-group">
@@ -35,7 +36,7 @@
 			</h2>
             <ul >
                 <li data-ng-repeat="item in projects" >
-                    <a href = "items/{{item._id}}/edit">{{item.title}}</a>
+                    <a href = "items/{{item._id}}/edit">{{item.title}}</a>[{{item.children}}]
                 </li>
             </ul>
 		</div>
