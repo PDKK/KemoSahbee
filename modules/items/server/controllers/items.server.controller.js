@@ -45,6 +45,7 @@ exports.update = function(req, res) {
     item.nextAction = req.body.nextAction;
     item.project = req.body.project;
     item.waitingFor = req.body.waitingFor;
+    item.parent = req.body.parent;
 
 	item.save(function(err) {
 		if (err) {

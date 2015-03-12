@@ -5,12 +5,19 @@
             <h2>
                 <strong>I</strong>nbox
             </h2>
-            Input for new task goes here
+
             <ul >
                 <li data-ng-repeat="item in inbox" >
                     <a href = "items/{{item._id}}/edit">{{item.title}}</a>
                 </li>
             </ul>
+            <form name="addForm" class="form-horizontal" data-ng-submit="newItem()" novalidate>
+                <div class="form-group">
+                    <input type="text" class="form-control" ng-model="newItemName" id="newItem" placeholder="New Item">
+                </div>
+                <input type="submit" style="position: absolute; left: -9999px; width: 1px; height: 1px;"/>
+            </form>
+
         </div>
 		<div class="col-md-3">
 			<h2>

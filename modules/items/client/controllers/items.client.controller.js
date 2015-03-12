@@ -40,7 +40,8 @@ angular.module('items').controller('ItemsController', ['$scope', '$stateParams',
 			var item = $scope.item;
 
 			item.$update(function() {
-				$location.path('items/' + item._id);
+                // After an item update, return to the home page
+                $location.path('');
 			}, function(errorResponse) {
 				$scope.error = errorResponse.data.message;
 			});
